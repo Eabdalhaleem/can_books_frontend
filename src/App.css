@@ -1,0 +1,28 @@
+#root{
+    height: 100%;
+}
+
+.logout-btn{
+    margin-left: 60rem;
+}
+nav a{
+    padding: 1rem;
+}
+
+.userInfo-section{
+    text-align: center;
+    padding: 10px;
+}
+.username-title{
+    font-weight: 800;
+    font-size: 3rem;
+}
+.user-img{
+    border-radius: 50%;
+    width: 20rem;
+    box-shadow: -8px -8px 8px 2px rgb(83, 83, 83);
+}
+.user-email{
+    font-weight: 600;
+    font-size: 1.5rem;
+}
