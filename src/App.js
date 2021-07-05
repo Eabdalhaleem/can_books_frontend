@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import { withAuth0 } from '@auth0/auth0-react';
+import axios from 'axios'
 import BestBooks from './BestBooks';
 import Login from './Login'
 import Profile from './Profile';
@@ -14,7 +15,24 @@ import {
 
 
 class App extends React.Component {
-
+    componentDidMount = () => {
+    if (this.props.auth0.isAuthenticated) {
+      this.props.auth0.getIdTokenClaims().then(res => {
+        const jwt = res.__raw;
+        const config = {
+          headers: { "Authorization":`Bearer ${ jwt }`
+        },
+        method: 'get',
+        baseURL: process.env.REACT_APP_BACKEND_URL,
+        url: '/authorize'
+      }
+       axios(config)
+        .then(axiosResults => console.log(axiosResults.data))
+        .catch(err => console.error(err));
+     }).catch(err => console.error(err));
+   }
+   
+}
   render() {
     console.log('app', this.props);
     return(
