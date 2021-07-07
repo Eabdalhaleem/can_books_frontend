@@ -6,6 +6,7 @@ import { withAuth0 } from '@auth0/auth0-react'
 import axios from 'axios'
 import AddBookBtn from './AddBookBtn';
 import DeleteBookBtn from './DeleteBookBtn';
+import UpdateBookBtn from './UpdateBookBtn';
 
 
 class MyFavoriteBooks extends React.Component {
@@ -16,7 +17,6 @@ class MyFavoriteBooks extends React.Component {
         name:'',
         description:'',
         status:'',
-        show:false
       }
     }
 
@@ -36,7 +36,7 @@ getBooks=async ()=>{
   })
   console.log(this.state.myBook);
 }
-
+// get the form fildes
 getName=(e)=>{
   e.preventDefault();
   this.setState({
@@ -44,6 +44,7 @@ getName=(e)=>{
   })
 }
 getDescription=(e)=>{
+  console.log(e.target.value);
   e.preventDefault();
   this.setState({
     deccription:e.target.value
@@ -51,11 +52,11 @@ getDescription=(e)=>{
 }
 getStatus=(e)=>{
   e.preventDefault();
-  console.log(e.target.value);
   this.setState({
     status:e.target.value
   })
 }
+//add books
 addBook= async (e)=>{
   e.preventDefault();
   const {user}=this.props.auth0;
@@ -72,6 +73,7 @@ addBook= async (e)=>{
     myBook:addBookURL.data
   })
 }
+//delete books
 deleteBook=async(book_idx)=>{
   const {user}=this.props.auth0;
   console.log(book_idx);
@@ -79,11 +81,30 @@ deleteBook=async(book_idx)=>{
     email:user.email
   }
   const deleteBookURL=await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/deletebook/${Number(book_idx)}`,{params:qureyEmail});
-    console.log(deleteBookURL);
-    this.setState({
-      myBook:deleteBookURL.data
-    })
+  console.log(deleteBookURL);
+  this.setState({
+    myBook:deleteBookURL.data
+  })
 }
+//updatebooks
+updateBook= async (e,index)=>{
+  e.preventDefault();
+  console.log(index);
+  const {user}=this.props.auth0;
+  const bookData={
+    name:this.state.name,
+    description:this.state.description,
+    status:this.state.status,
+    email:user.email
+  }
+  console.log(bookData);
+  const updateBookURL=await axios.put(`${process.env.REACT_APP_BACKEND_URL}/updatebook/${index}`,bookData);
+  console.log(updateBookURL.data);
+  this.setState({
+    myBook:updateBookURL.data
+  })
+}
+
 render() {
   return (
     <>
@@ -113,6 +134,15 @@ render() {
               <DeleteBookBtn 
                 deleteBook={this.deleteBook}
                 index={index}
+              />
+              <div className="space"></div>
+              <UpdateBookBtn key={index} id={index}
+                getName={this.getName}
+                getDescription={this.getDescription}
+                getStatus={this.getStatus}
+                updateBook={this.updateBook}
+                index={index}
+                bookName= {book.name}
               />
             </Card.Footer>
             </Card>
