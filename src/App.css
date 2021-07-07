@@ -38,3 +38,62 @@ nav a{
 .cardBook .card-title{
     font-size: 2rem;
 }
+.cardBook .card-footer{
+    background-color: gray;
+    display: flex;
+    border-radius:0px 30px 0px 30px ;
+    justify-content: center;
+}
+.space{
+    margin: 0 40px  0 40px ;
+}
+
+.add-form{
+    margin: 20px;
+}
+.add-form input,.update-form input{
+    margin: 5px;
+    border-radius: 10px;
+    outline: none;
+    text-align: center;
+    height: 35px;
+    box-shadow: 0 0 4px black;
+    border: none;
+}
+.update-form{
+   display: grid;
+}
+.update-form label{
+    margin-top: 90px;
+    display: contents;
+}
+.update-form input{
+    margin-left: 80px;
+    margin-top: -27px;
+}
+
+.add-form button,.update-form button{
+    margin-top: 18px;
+    outline: none;
+    border: none;
+    width: 104px;
+    height: 41px;
+    border-radius: 20px;
+    background: skyblue;
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 0 4px blac
+}
+.update-form button{
+    margin-top: 20px;
+    background: rgb(58, 199, 16);
+    width: 150px;
+    margin-left: 10rem;
+}
+.modal-header{
+    font-size: 1.8rem;
+    font-weight: 800;
+    text-transform: capitalize;
+    font-family: cursive;
+
+}

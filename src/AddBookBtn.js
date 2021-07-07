@@ -4,7 +4,7 @@ class AddBookBtn extends Component {
     render() {
         return (
             <div>
-                <form onSubmit={(e)=>this.props.addBook(e)}>
+                <form className="add-form" onSubmit={(e)=>this.props.addBook(e)}>
                     <label>Name:</label>
                     <input type="text" onChange={(e)=>this.props.getName(e)}></input>
                     <label>Decription:</label>
